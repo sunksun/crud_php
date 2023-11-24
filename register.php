@@ -90,21 +90,25 @@ include_once('connect_db.php');
             <th scope="col">อีเมล์</th>
             <th scope="col">ที่อยู่</th>
             <th scope="col">รหัสผ่าน</th>
+            <th scope="col">สถานะ</th>
           </tr>
         </thead>
         <tbody>
           <?php
           if (mysqli_num_rows($result) > 0) {
             // output data of each row
+            $i = 1 ;
             while($row = mysqli_fetch_assoc($result)) {
           ?>
           <tr>
-            <th scope="row">1</th>
+            <th scope="row"><?php echo $i ?></th>
             <td><?php echo $row["email"] ?></td>
             <td><?php echo $row["address1"] ?></td>
-            <td>@<?php echo $row["pass_word"] ?></td>
+            <td><?php echo $row["pass_word"] ?></td>
+            <td><?php echo $row["check_me"] ?></td>
           </tr>
           <?php
+          $i++ ;
           }
         }
           ?>
