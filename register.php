@@ -91,6 +91,7 @@ include_once('connect_db.php');
             <th scope="col">ที่อยู่</th>
             <th scope="col">รหัสผ่าน</th>
             <th scope="col">สถานะ</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
@@ -106,6 +107,11 @@ include_once('connect_db.php');
             <td><?php echo $row["address1"] ?></td>
             <td><?php echo $row["pass_word"] ?></td>
             <td><?php echo $row["check_me"] ?></td>
+            <td>
+              <a href="Javascript:if(confirm('ยืนยันการลบข้อมูล')==true) 
+              {window.location='registerDel.php';}" class="btn btn-danger">ลบ</a>
+              <a href="registerEdit.php" class="btn btn-warning">แก้ไข</a>
+            </td>
           </tr>
           <?php
           $i++ ;
