@@ -16,7 +16,9 @@ $sql = "INSERT INTO `register` (`id`, `email`, `pass_word`, `address1`, `address
 current_timestamp());";
 
 if (mysqli_query($conn, $sql)) {
-    echo "New record created successfully";
+    echo '<script language="JavaScript">';
+    echo 'alert("บันทึกข้อมูลเรียบร้อยแล้ว"); location.href = "register.php"';
+    echo '</script>';
 } else {
     echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
