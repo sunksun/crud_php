@@ -109,7 +109,7 @@ include_once('connect_db.php');
             <td><?php echo $row["check_me"] ?></td>
             <td>
               <a href="Javascript:if(confirm('ยืนยันการลบข้อมูล')==true) 
-              {window.location='registerDel.php';}" class="btn btn-danger">ลบ</a>
+              {window.location='registerDel.php?id=<?php echo $row["id"]; ?>';}" class="btn btn-danger">ลบ</a>
               <a href="registerEdit.php" class="btn btn-warning">แก้ไข</a>
             </td>
           </tr>
