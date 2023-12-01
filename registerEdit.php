@@ -33,27 +33,33 @@ include_once('connect_db.php');
 
 <body>
   <div class="container">
-    <h1>เพิ่มข้อมูลส่วนตัว</h1>
+    <h1>แก้ไขข้อมูลส่วนตัว</h1>
+    <?php
+    $id = $_GET["id"];
+    $sql = "SELECT * FROM `register` WHERE id = '$id';";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_assoc($result);
+    ?>
     <form action="registerSave.php" name="myForm" class="row g-3" method="post" onsubmit="return validateForm()">
       <div class="col-md-6">
         <label for="inputEmail4" class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" id="inputEmail4">
+        <input type="email" value="<?php echo $row["email"]; ?>" name="email" class="form-control" id="inputEmail4">
       </div>
       <div class="col-md-6">
         <label for="inputPassword4" class="form-label">Password</label>
-        <input type="password" name="pass_word" class="form-control" id="inputPassword4">
+        <input type="password" value="<?php echo $row["pass_word"]; ?>" name="pass_word" class="form-control" id="inputPassword4">
       </div>
       <div class="col-12">
         <label for="inputAddress" class="form-label">Address</label>
-        <input type="text" name="address1" class="form-control" id="inputAddress" placeholder="1234 Main St">
+        <input type="text" value="<?php echo $row["address1"]; ?>" name="address1" class="form-control" id="inputAddress" placeholder="1234 Main St">
       </div>
       <div class="col-12">
         <label for="inputAddress2" class="form-label">Address 2</label>
-        <input type="text" name="address2" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+        <input type="text" value="<?php echo $row["address2"]; ?>" name="address2" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
       </div>
       <div class="col-md-6">
         <label for="inputCity" class="form-label">City</label>
-        <input type="text" name="city" class="form-control" id="inputCity">
+        <input type="text" value="<?php echo $row["city"]; ?>" name="city" class="form-control" id="inputCity">
       </div>
       <div class="col-md-4">
         <label for="inputState" class="form-label">State</label>
@@ -66,7 +72,7 @@ include_once('connect_db.php');
       </div>
       <div class="col-md-2">
         <label for="inputZip" class="form-label">Zip</label>
-        <input type="text" name="zip" class="form-control" id="inputZip">
+        <input type="text" value="<?php echo $row["zip"]; ?>" name="zip" class="form-control" id="inputZip">
       </div>
       <div class="col-12">
         <div class="form-check">
@@ -81,47 +87,7 @@ include_once('connect_db.php');
       </div>
     </form>
     <hr>
-    <?php
-    $sql = "SELECT * FROM `register` ORDER BY `register`.`id` DESC";
-    $result = mysqli_query($conn, $sql);
-    ?>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">อีเมล์</th>
-          <th scope="col">ที่อยู่</th>
-          <th scope="col">รหัสผ่าน</th>
-          <th scope="col">สถานะ</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-        if (mysqli_num_rows($result) > 0) {
-          // output data of each row
-          $i = 1;
-          while ($row = mysqli_fetch_assoc($result)) {
-        ?>
-            <tr>
-              <th scope="row"><?php echo $i ?></th>
-              <td><?php echo $row["email"] ?></td>
-              <td><?php echo $row["address1"] ?></td>
-              <td><?php echo $row["pass_word"] ?></td>
-              <td><?php echo $row["check_me"] ?></td>
-              <td>
-                <a href="Javascript:if(confirm('ยืนยันการลบข้อมูล')==true) 
-              {window.location='registerDel.php?id=<?php echo $row["id"]; ?>';}" class="btn btn-danger">ลบ</a>
-                <a href="registerEdit.php?id=<?php echo $row["id"]; ?>" class="btn btn-warning">แก้ไข</a>
-              </td>
-            </tr>
-        <?php
-            $i++;
-          }
-        }
-        ?>
-      </tbody>
-    </table>
+
   </div>
 
   <!-- Optional JavaScript; choose one of the two! -->
