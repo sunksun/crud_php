@@ -40,7 +40,7 @@ include_once('connect_db.php');
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
     ?>
-    <form action="registerSave.php" name="myForm" class="row g-3" method="post" onsubmit="return validateForm()">
+    <form action="registerSave.php?id=<?php echo $row["id"]; ?>" name="myForm" class="row g-3" method="post" onsubmit="return validateForm()">
       <div class="col-md-6">
         <label for="inputEmail4" class="form-label">Email</label>
         <input type="email" value="<?php echo $row["email"]; ?>" name="email" class="form-control" id="inputEmail4">
@@ -83,7 +83,7 @@ include_once('connect_db.php');
         </div>
       </div>
       <div class="col-12">
-        <input type="submit" name="save" value="บันทึกข้อมูล" class="btn btn-primary">
+        <input type="submit" name="update" value="บันทึกข้อมูล" class="btn btn-success">
       </div>
     </form>
     <hr>
