@@ -1,14 +1,16 @@
 <?php 
+session_start();
 include_once('connect_db.php');
 if (isset($_POST['login'])) {
-    $sql = "SELECT * FROM tbladmin WHERE username = ? AND password = ?";
-    $uname = $_POST['username'];
-    $password = md5($_POST['password']);
+    $sql = "SELECT * FROM register WHERE email = ? AND pass_word = ?";
+    $email = $_POST['email'];
+    $pass_word = md5($_POST['pass_word']);
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param('ss', $uname, $password);
+    $stmt->bind_param('ss', $email, $pass_word);
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
+    $_SESSION['email'] = $row['email'];
     if ($row > 0 ) {
         echo '<script type="text/javascript">';
         echo 'setTimeout(function () { swal.fire({
@@ -49,6 +51,10 @@ if (isset($_POST['login'])) {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <title>Hello, world!</title>
+
+    <script src="sweetalert2/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="sweetalert2/dist/sweetalert2.min.css">
+
   </head>
   <body>
   <div class="container-fluid">
@@ -58,12 +64,12 @@ if (isset($_POST['login'])) {
     <form method="post">
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        <input type="password" name="pass_word" class="form-control" id="exampleInputPassword1" placeholder="Password">
     </div>
     <div class="form-group form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1">
