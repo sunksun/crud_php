@@ -10,7 +10,7 @@ if (isset($_POST['login'])) {
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
-    $_SESSION['email'] = $row['email'];
+    //$_SESSION['email'] = $row['email'];
     if ($row > 0 ) {
         echo '<script type="text/javascript">';
         echo 'setTimeout(function () { swal.fire({
